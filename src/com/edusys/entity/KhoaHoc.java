@@ -18,17 +18,21 @@ public class KhoaHoc {
     String ThoiLuong;
     Date NgayKhaiGiang;
     String GhiChu;
+    String MaNV;
+    String NgayTao;
 
-    public KhoaHoc(String MaKH, String MaCD, float HocPhi, String ThoiLuong, Date NgayKhaiGiang, String GhiChu) {
+    public KhoaHoc() {
+    }
+
+    public KhoaHoc(String MaKH, String MaCD, float HocPhi, String ThoiLuong, Date NgayKhaiGiang, String GhiChu, String MaNV, String NgayTao) {
         this.MaKH = MaKH;
         this.MaCD = MaCD;
         this.HocPhi = HocPhi;
         this.ThoiLuong = ThoiLuong;
         this.NgayKhaiGiang = NgayKhaiGiang;
         this.GhiChu = GhiChu;
-    }
-
-    public KhoaHoc() {
+        this.MaNV = MaNV;
+        this.NgayTao = NgayTao;
     }
 
     public String getMaKH() {
@@ -78,6 +82,25 @@ public class KhoaHoc {
     public void setGhiChu(String GhiChu) {
         this.GhiChu = GhiChu;
     }
+
+    public String getMaNV() {
+        return MaNV;
+    }
+
+    public void setMaNV(String MaNV) {
+        this.MaNV = MaNV;
+    }
+
+    public String getNgayTao() {
+        return NgayTao;
+    }
+
+    public void setNgayTao(String NgayTao) {
+        this.NgayTao = NgayTao;
+    }
+    
+    
+    
     
     
 }

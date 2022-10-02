@@ -6,19 +6,20 @@
 package com.edusys.utils;
 
 import java.sql.*;
+
 /**
  *
  * @author Admin
  */
 public class JdbcHelper {
-    static String driver = "com.microsoft.sqlsever.SQLSeverDriver";
-    static String dburl = "jdbc:sqlserver://localhost;database=EdySys";
-    static String user ="sa";
+
+    static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=edusysdao;encrypt=true;trustServerCertificate=true";
+    static String user ="edusys";
     static String pass = "123";
     
     static {
         try {
-            Class.forName(driver);
+            Class.forName("com.microsoft.sqlsever.SQLSeverDriver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -63,4 +64,14 @@ public class JdbcHelper {
             throw new RuntimeException(e);
         }
     }
+//    public static void main(String[] args) {
+//        try {
+//            String dburl = "jdbc:sqlserver://localhost:1433;databaseName=edusysdao;encrypt=true;trustServerCertificate=true";
+//            String user = "edusys";
+//            String pass = "123";
+//            Connection con = DriverManager.getConnection(dburl,user,pass);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//    }
 }

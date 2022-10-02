@@ -6,7 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -25,12 +25,15 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" max="32767" attributes="0"/>
+              <Component id="lblBackground" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Component id="jProgressBar1" min="-2" pref="494" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="lblLoadingValue" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="progressBar" min="-2" pref="494" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -39,23 +42,27 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="329" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-              <Component id="jProgressBar1" min="-2" pref="29" max="-2" attributes="0"/>
+              <Component id="lblBackground" min="-2" pref="329" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="lblLoadingValue" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="progressBar" min="-2" pref="29" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="lblBackground">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/com/edusys/icons/logo.png"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JProgressBar" name="jProgressBar1">
+    <Component class="javax.swing.JProgressBar" name="progressBar">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLoadingValue">
     </Component>
   </SubComponents>
 </Form>

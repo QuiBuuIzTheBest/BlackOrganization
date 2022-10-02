@@ -5,15 +5,9 @@
  */
 package com.edusys.ui;
 
-/**
- *
- * @author Admin
- */
 public class EdusysJFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Polypro
-     */
+    
+    
     public EdusysJFrame() {
         initComponents();
     }
@@ -263,7 +257,7 @@ public class EdusysJFrame extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

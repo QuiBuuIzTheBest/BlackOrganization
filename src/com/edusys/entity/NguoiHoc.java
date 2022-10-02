@@ -5,40 +5,30 @@
  */
 package com.edusys.entity;
 
+import java.util.Date;
+
 /**
  *
  * @author Admin
  */
 public class NguoiHoc {
-    String MaHV;
-    String MaKH;
     String MaNH;
-    float DiemTB;
-
-    public NguoiHoc(String MaHV, String MaKH, String MaNH, float DiemTB) {
-        this.MaHV = MaHV;
-        this.MaKH = MaKH;
-        this.MaNH = MaNH;
-        this.DiemTB = DiemTB;
-    }
+    String hoVaTen;
+    Date ngaySinh;
+    String gioiTinh;
+    String email;
+    String ghiChu;
 
     public NguoiHoc() {
     }
 
-    public String getMaHV() {
-        return MaHV;
-    }
-
-    public void setMaHV(String MaHV) {
-        this.MaHV = MaHV;
-    }
-
-    public String getMaKH() {
-        return MaKH;
-    }
-
-    public void setMaKH(String MaKH) {
-        this.MaKH = MaKH;
+    public NguoiHoc(String MaNH, String hoVaTen, Date ngaySinh, String gioiTinh, String email, String ghiChu) {
+        this.MaNH = MaNH;
+        this.hoVaTen = hoVaTen;
+        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+        this.email = email;
+        this.ghiChu = ghiChu;
     }
 
     public String getMaNH() {
@@ -49,13 +39,44 @@ public class NguoiHoc {
         this.MaNH = MaNH;
     }
 
-    public float getDiemTB() {
-        return DiemTB;
+    public String getHoVaTen() {
+        return hoVaTen;
     }
 
-    public void setDiemTB(float DiemTB) {
-        this.DiemTB = DiemTB;
+    public void setHoVaTen(String hoVaTen) {
+        this.hoVaTen = hoVaTen;
     }
-    
+
+    public Date getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
     
 }
