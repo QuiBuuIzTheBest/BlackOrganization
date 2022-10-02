@@ -62,7 +62,7 @@ public class NguoiHocDAO extends EdusysDAO<NguoiHoc, String>{
     }
 
     @Override
-    protected List<NguoiHoc> selectBySql(String sql, Object... args) {
+    public List<NguoiHoc> selectBySql(String sql, Object... args) {
         List<NguoiHoc> list = new ArrayList<>();
         try {
             ResultSet rs = JdbcHelper.executeQuery(sql, args);

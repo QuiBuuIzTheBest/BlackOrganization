@@ -57,7 +57,7 @@ public class HocVienDAO extends EdusysDAO<HocVien, String>{
     }
 
     @Override
-    protected List<HocVien> selectBySql(String sql, Object... args) {
+    public List<HocVien> selectBySql(String sql, Object... args) {
         List<HocVien> list = new ArrayList<>();
         try {
             ResultSet rs = JdbcHelper.executeQuery(sql, args);

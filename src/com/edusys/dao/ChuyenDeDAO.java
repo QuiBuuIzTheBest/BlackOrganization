@@ -65,7 +65,7 @@ public class ChuyenDeDAO extends EdusysDAO<ChuyenDe, String>{
     }
 
     @Override
-    protected List<ChuyenDe> selectBySql(String sql, Object... args) {
+    public List<ChuyenDe> selectBySql(String sql, Object... args) {
         List<ChuyenDe> list = new ArrayList<>();
         try {
             ResultSet rs = JdbcHelper.executeQuery(sql, args);

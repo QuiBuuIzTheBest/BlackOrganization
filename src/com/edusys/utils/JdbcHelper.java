@@ -14,16 +14,16 @@ import java.sql.*;
 public class JdbcHelper {
 
     static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=edusysdao;encrypt=true;trustServerCertificate=true";
-    static String user ="edusys";
+    static String user = "edusys";
     static String pass = "123";
-    
-    static {
-        try {
-            Class.forName("com.microsoft.sqlsever.SQLSeverDriver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
+//    static {
+//        try {
+//            Class.forName("com.microsoft.sqlsever.SQLSeverDriver");
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//    } thêm cái này nó lỗi quá nên Trọng bỏ nó luôn
 
     public static PreparedStatement preparedStatement(String sql, Object... args) throws SQLException {
         Connection conn = DriverManager.getConnection(dburl, user, pass);
@@ -42,11 +42,7 @@ public class JdbcHelper {
     public static ResultSet executeQuery(String sql, Object... args) {
         try {
             PreparedStatement pstmt = preparedStatement(sql, args);
-            try {
-                return pstmt.executeQuery();
-            } finally {
-
-            }
+            return pstmt.executeQuery();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -64,14 +60,4 @@ public class JdbcHelper {
             throw new RuntimeException(e);
         }
     }
-//    public static void main(String[] args) {
-//        try {
-//            String dburl = "jdbc:sqlserver://localhost:1433;databaseName=edusysdao;encrypt=true;trustServerCertificate=true";
-//            String user = "edusys";
-//            String pass = "123";
-//            Connection con = DriverManager.getConnection(dburl,user,pass);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//    }
 }

@@ -36,7 +36,7 @@ public class NhanVienDAO extends EdusysDAO<NhanVien, String> {
                 entity.getMaNV(),
                 entity.getMatKhau(),
                 entity.getHoTen(),
-                entity.isVaiTro())  ;
+                entity.isVaiTro());
     }
 
     @Override
@@ -64,11 +64,7 @@ public class NhanVienDAO extends EdusysDAO<NhanVien, String> {
         try {
             ResultSet rs = JdbcHelper.executeQuery(sql, args);
             while (rs.next()) {
-                NhanVien entity = new NhanVien();
-                entity.setMaNV(rs.getString("MaNv"));
-                entity.setMatKhau(rs.getString("MatKhau"));
-                entity.setHoTen(rs.getString("HoTen"));
-                entity.setVaiTro(rs.getBoolean("VaiTro"));
+                NhanVien entity = readFromResultSet(rs);
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();
@@ -76,5 +72,14 @@ public class NhanVienDAO extends EdusysDAO<NhanVien, String> {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private NhanVien readFromResultSet(ResultSet rs) throws SQLException {
+        NhanVien entity = new NhanVien();
+        entity.setMaNV(rs.getString("MaNv"));
+        entity.setMatKhau(rs.getString("MatKhau"));
+        entity.setHoTen(rs.getString("HoTen"));
+        entity.setVaiTro(rs.getBoolean("VaiTro"));
+        return entity;
     }
 }
