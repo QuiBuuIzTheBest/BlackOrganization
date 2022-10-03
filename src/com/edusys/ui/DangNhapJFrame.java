@@ -21,15 +21,21 @@ public class DangNhapJFrame extends javax.swing.JFrame {
 
     public DangNhapJFrame() {
         initComponents();
+        setTitle("Đăng nhập");
+        init();
     }
 
-    void exit() {
+    public void init() {
+        setLocationRelativeTo(null);
+    }
+
+    void ketThuc() {
         if (MsgBox.confirm(this, "Bạn có chắc muốn thoát không?")) {
             System.exit(0);
         }
     }
 
-    void login() {
+    void dangNhap() {
         String manv = txtUserName.getText();
         String password = new String(txtPass.getPassword());
         NhanVien nhanVien = dao.selectById(manv);
@@ -40,7 +46,8 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         } else {
             Auth.user = nhanVien;
             this.dispose();
-            new EdusysJFrameDaDangNhap().setVisible(true);
+            new EdusysJFrame().setVisible(true);
+            new EdusysJFrame().setVisible(true);
         }
     }
 
@@ -114,15 +121,12 @@ public class DangNhapJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        login();
+        dangNhap();
     }//GEN-LAST:event_btnLoginActionPerformed
 
+
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        int thoat = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thoát không ?", "Thoát chương trình", JOptionPane.YES_NO_OPTION);
-        if (thoat == JOptionPane.YES_OPTION) {
-            dispose();
-            System.exit(0);
-        }
+        ketThuc();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMousePressed

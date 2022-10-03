@@ -284,7 +284,7 @@ public class ChuyenDeJDialog extends javax.swing.JDialog{
         int back = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn quay lại trang chính ?", "Quay lại trang chính", JOptionPane.YES_NO_OPTION);
         if (back == JOptionPane.YES_OPTION) {
             dispose();
-            new EdusysJFrameDaDangNhap().setVisible(true);
+            new EdusysJFrame().setVisible(true);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 

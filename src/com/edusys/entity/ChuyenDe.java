@@ -15,14 +15,14 @@ public class ChuyenDe {
     String ThoiLuong;
     float HocPhi;
     String MoTa;
-    private  byte[] HinhLogo;
+    String HinhLogo;
 
     public ChuyenDe() {
     }
     
     
 
-    public ChuyenDe(String MaCD, String TenCD, String ThoiLuong, float HocPhi, String MoTa, byte[] HinhLogo) {
+    public ChuyenDe(String MaCD, String TenCD, String ThoiLuong, float HocPhi, String MoTa, String HinhLogo) {
         this.MaCD = MaCD;
         this.TenCD = TenCD;
         this.ThoiLuong = ThoiLuong;
@@ -73,11 +73,11 @@ public class ChuyenDe {
         this.MoTa = MoTa;
     }
 
-    public byte[] getHinhLogo() {
+    public String getHinhLogo() {
         return HinhLogo;
     }
 
-    public void setHinhLogo(byte[] HinhLogo) {
+    public void setHinhLogo(String HinhLogo) {
         this.HinhLogo = HinhLogo;
     }
     

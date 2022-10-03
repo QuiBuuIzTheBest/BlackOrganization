@@ -17,11 +17,11 @@ import java.util.List;
  */
 public class ChuyenDeDAO extends EdusysDAO<ChuyenDe, String>{
     
-    String INSERT_SQL = "INSERT INTO ChuyenDe (MaCD, TenCD, HocPhi, ThoiLuong, Hinh, MoTa) VALUES (?, ?, ?, ?, ?, ?)";
-    String UPDATE_SQL = "UPDATE ChuyenDe SET TenCD=?, HocPhi=?, ThoiLuong=?, Hinh=?, MoTa=? WHERE MaCD=?";
-    String DELETE_SQL = "DELETE FROM ChuyenDe WHERE MaCD=?";
-    String SELECT_ALL_SQL = "SELECT * FROM ChuyenDe";
-    String SELECT_BY_ID_SQL = "SELECT * FROM ChuyenDe WHERE MaCD=?";
+    String INSERT_SQL = "INSERT INTO chuyen_de (MaCD, TenCD, ThoiLuong, HocPhi, MoTa, Hinh) VALUES (?, ?, ?, ?, ?, ?)";
+    String UPDATE_SQL = "UPDATE ChuyenDe SET TenCD=?, ThoiLuong=?, HocPhi=?, MoTa=?, Hinh=? WHERE MaCD=?";
+    String DELETE_SQL = "DELETE FROM chuyen_de WHERE MaCD=?";
+    String SELECT_ALL_SQL = "SELECT * FROM chuyen_de";
+    String SELECT_BY_ID_SQL = "SELECT * FROM chuyen_de WHERE MaCD=?";
 
     @Override
     public void insert(ChuyenDe entity) {
@@ -73,10 +73,10 @@ public class ChuyenDeDAO extends EdusysDAO<ChuyenDe, String>{
                 ChuyenDe entity = new ChuyenDe();
                 entity.setMaCD(rs.getString("MaCD"));
                 entity.setTenCD(rs.getString("TenCD"));
-                entity.setHocPhi(rs.getFloat("HocPhi"));
                 entity.setThoiLuong(rs.getString("ThoiLuong"));
-                entity.setHinhLogo(rs.getBytes("Hinh"));
+                entity.setHocPhi(rs.getFloat("HocPhi"));
                 entity.setMoTa(rs.getString("MoTa"));
+                entity.setHinhLogo(rs.getString("Hinh"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();
