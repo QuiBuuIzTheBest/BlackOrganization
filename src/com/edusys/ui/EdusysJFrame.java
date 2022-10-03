@@ -5,6 +5,7 @@
  */
 package com.edusys.ui;
 
+import com.edusys.dao.ThongKeDAO;
 import com.edusys.utils.Auth;
 import javax.swing.JOptionPane;
 import java.awt.Desktop;
@@ -53,12 +54,12 @@ public class EdusysJFrame extends javax.swing.JFrame {
     }
 
     public void openDoiMatKhau() {
-dispose();
+        dispose();
         new DoiMatKhauJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void dangXuat() {
-int dangXuat = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn đăng xuất không ?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
+        int dangXuat = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn đăng xuất không ?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
         if (dangXuat == JOptionPane.YES_OPTION) {
             dispose();
             new DangNhapJFrame().setVisible(true);
@@ -66,7 +67,7 @@ int dangXuat = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn �
     }
 
     public void ketThuc() {
-int thoat = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thoát không ?", "Thoát chương trình", JOptionPane.YES_NO_OPTION);
+        int thoat = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thoát không ?", "Thoát chương trình", JOptionPane.YES_NO_OPTION);
         if (thoat == JOptionPane.YES_OPTION) {
             dispose();
             System.exit(0);
@@ -74,43 +75,55 @@ int thoat = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn tho�
     }
 
     public void openNhanVien() {
-dispose();
+        dispose();
         new NhanVienJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void openKhoaHoc() {
-dispose();
+        dispose();
         new KhoaHocJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void openChuyenDe() {
-dispose();
+        dispose();
         new ChuyenDeJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void openNguoiHoc() {
-dispose();
-        new NguoiHocJDialog(this, rootPaneCheckingEnabled).setVisible(rootPaneCheckingEnabled);
+        dispose();
+        new NguoiHocJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void openHocVien() {
-
+        dispose();
+        new HocVienJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void openThongKe() {
-
+        dispose();
+        new TH_TKJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void openGioiThieu() {
-
+        dispose();
+        new GioiThieuJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void openHuongDan() {
-
+        try {
+            try {
+                Desktop.getDesktop().browse(new URI("https://youtu.be/BBJa32lCaaY"));
+            } catch (IOException ex) {
+                Logger.getLogger(EdusysJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(EdusysJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void openDangNhap() {
-
+        dispose();
+        new DangNhapJFrame().setVisible(true);
     }
 
     /**
@@ -272,6 +285,11 @@ dispose();
         mniLogin.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icons/Key.png"))); // NOI18N
         mniLogin.setText("Đăng nhập");
+        mniLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniLoginActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniLogin);
 
         mniLogout.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -414,101 +432,76 @@ dispose();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        
+        dangXuat();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        int thoat = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thoát không ?", "Thoát chương trình", JOptionPane.YES_NO_OPTION);
-        if (thoat == JOptionPane.YES_OPTION) {
-            dispose();
-            System.exit(0);
-        }
+        ketThuc();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void mniNguoiHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniNguoiHocActionPerformed
-        
+        openNguoiHoc();
     }//GEN-LAST:event_mniNguoiHocActionPerformed
 
     private void mniExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniExitActionPerformed
-        
+        ketThuc();
     }//GEN-LAST:event_mniExitActionPerformed
 
     private void mniChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniChangePasswordActionPerformed
-        
+        openDoiMatKhau();
     }//GEN-LAST:event_mniChangePasswordActionPerformed
 
     private void mniLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLogoutActionPerformed
-        int dangXuat = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn đăng xuất không ?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
-        if (dangXuat == JOptionPane.YES_OPTION) {
-            dispose();
-            new DangNhapJFrame().setVisible(true);
-        }
+        dangXuat();
     }//GEN-LAST:event_mniLogoutActionPerformed
 
     private void mniChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniChuyenDeActionPerformed
-        
+        openChuyenDe();
     }//GEN-LAST:event_mniChuyenDeActionPerformed
 
     private void mniKhoaHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniKhoaHocActionPerformed
-        
+        openKhoaHoc();
     }//GEN-LAST:event_mniKhoaHocActionPerformed
 
     private void mniNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniNhanVienActionPerformed
-        dispose();
-        new NhanVienJDialog(this, rootPaneCheckingEnabled).setVisible(true);
+        openNhanVien();
     }//GEN-LAST:event_mniNhanVienActionPerformed
 
     private void mniThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThongKeActionPerformed
-        dispose();
-        new TH_TKJDialog(this, rootPaneCheckingEnabled).setVisible(true);
+        openThongKe();
     }//GEN-LAST:event_mniThongKeActionPerformed
 
     private void btnChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuyenDeActionPerformed
-        dispose();
-        new ChuyenDeJDialog(this, rootPaneCheckingEnabled).setVisible(true);
+        openChuyenDe();
     }//GEN-LAST:event_btnChuyenDeActionPerformed
 
     private void btnNguoiHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNguoiHocActionPerformed
-        dispose();
-        new NguoiHocJDialog(this, rootPaneCheckingEnabled).setVisible(rootPaneCheckingEnabled);
+        openNguoiHoc();
     }//GEN-LAST:event_btnNguoiHocActionPerformed
 
     private void btnKhoaHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhoaHocActionPerformed
-        dispose();
-        new KhoaHocJDialog(this, rootPaneCheckingEnabled).setVisible(true);
+        openKhoaHoc();
     }//GEN-LAST:event_btnKhoaHocActionPerformed
 
     private void btnHuongDanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuongDanActionPerformed
-        try {
-            try {
-                Desktop.getDesktop().browse(new URI("https://youtu.be/BBJa32lCaaY"));
-            } catch (IOException ex) {
-                Logger.getLogger(EdusysJFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(EdusysJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        openHuongDan();
     }//GEN-LAST:event_btnHuongDanActionPerformed
 
     private void mniHuongDanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniHuongDanActionPerformed
-        try {
-            try {
-                Desktop.getDesktop().browse(new URI("https://youtu.be/B2ElZK0u85Y"));
-            } catch (IOException ex) {
-                Logger.getLogger(EdusysJFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(EdusysJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        openHuongDan();
     }//GEN-LAST:event_mniHuongDanActionPerformed
 
     private void mniGioiThieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniGioiThieuActionPerformed
-        new GioiThieuJDialog(this, rootPaneCheckingEnabled).setVisible(true);
+        openGioiThieu();
     }//GEN-LAST:event_mniGioiThieuActionPerformed
 
     private void mniHocVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniHocVienActionPerformed
-        // TODO add your handling code here:
+        openHocVien();
     }//GEN-LAST:event_mniHocVienActionPerformed
+
+    private void mniLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLoginActionPerformed
+        openDangNhap();
+    }//GEN-LAST:event_mniLoginActionPerformed
 
     /**
      * @param args the command line arguments
