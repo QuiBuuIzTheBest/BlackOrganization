@@ -20,15 +20,20 @@ public class DangNhapJFrame extends javax.swing.JFrame {
     
     public DangNhapJFrame() {
         initComponents();
+        setTitle("Đăng nhập");
+        init();
     }
 
-    void exit() {
+    public void init(){
+        setLocationRelativeTo(null);
+    }
+    void ketThuc() {
         if (MsgBox.confirm(this, "Bạn có chắc muốn thoát không?")) {
             System.exit(0);
         }
     }
     
-    void login() {
+    void dangNhap() {
         String manv = txtUserName.getText();
         String password = new String (txtPass.getPassword());
         NhanVien nhanVien = dao.selectById(manv);
@@ -105,11 +110,12 @@ public class DangNhapJFrame extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        login();
+        dangNhap();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
+        ketThuc();
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMousePressed

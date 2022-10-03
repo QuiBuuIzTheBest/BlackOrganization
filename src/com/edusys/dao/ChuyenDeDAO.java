@@ -76,7 +76,7 @@ public class ChuyenDeDAO extends EdusysDAO<ChuyenDe, String>{
                 entity.setThoiLuong(rs.getString("ThoiLuong"));
                 entity.setHocPhi(rs.getFloat("HocPhi"));
                 entity.setMoTa(rs.getString("MoTa"));
-                entity.setHinhLogo(rs.getBytes("Hinh"));
+                entity.setHinhLogo(rs.getString("Hinh"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();
