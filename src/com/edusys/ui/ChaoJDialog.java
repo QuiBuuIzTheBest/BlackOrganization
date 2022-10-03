@@ -26,7 +26,8 @@ public class ChaoJDialog extends javax.swing.JDialog {
                         progressBar.setValue(i);
                         if(i == 100){
                             dispose();
-                            new EdusysJFrame().setVisible(true);
+                            new DangNhapJFrame().setVisible(true);
+                            
                         }
                     }catch(Exception ex){
                         Logger.getLogger(ChaoJDialog.class.getName()).log(Level.SEVERE, null, ex);

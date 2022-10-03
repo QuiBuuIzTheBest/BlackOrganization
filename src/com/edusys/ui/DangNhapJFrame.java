@@ -44,7 +44,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         } else {
             Auth.user = nhanVien;
             this.dispose();
-            new ChaoJDialog(this, rootPaneCheckingEnabled).setVisible(true);
+            new EdusysJFrame().setVisible(true);
         }
     }
     /**
