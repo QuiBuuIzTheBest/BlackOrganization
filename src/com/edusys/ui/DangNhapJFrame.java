@@ -9,6 +9,7 @@ import com.edusys.entity.NhanVien;
 import com.edusys.utils.Auth;
 import com.edusys.utils.MsgBox;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,7 +18,7 @@ import java.awt.Color;
 public class DangNhapJFrame extends javax.swing.JFrame {
 
     NhanVienDAO dao = new NhanVienDAO();
-    
+
     public DangNhapJFrame() {
         initComponents();
     }
@@ -27,10 +28,10 @@ public class DangNhapJFrame extends javax.swing.JFrame {
             System.exit(0);
         }
     }
-    
+
     void login() {
         String manv = txtUserName.getText();
-        String password = new String (txtPass.getPassword());
+        String password = new String(txtPass.getPassword());
         NhanVien nhanVien = dao.selectById(manv);
         if (nhanVien == null) {
             MsgBox.alert(this, "Sai tên đăng nhập!");
@@ -39,9 +40,10 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         } else {
             Auth.user = nhanVien;
             this.dispose();
-            new ChaoJDialog(this, rootPaneCheckingEnabled).setVisible(true);
+            new EdusysJFrameDaDangNhap().setVisible(true);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,16 +59,20 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         txtPass = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("EduSys");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tên tài khoản");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 60, 108, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 108, -1));
         getContentPane().add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 72, 168, -1));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Mật khẩu");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 108, 108, 12));
@@ -96,30 +102,35 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         });
         getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 168, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icons/tu-fox-3.jpg"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icons/fpt.png"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 40, 30));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icons/photo-1585832770485-e68a5dbfad52.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 408, 300));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 408, 270));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
         login();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
+        int thoat = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thoát không ?", "Thoát chương trình", JOptionPane.YES_NO_OPTION);
+        if (thoat == JOptionPane.YES_OPTION) {
+            dispose();
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMousePressed
-        // TODO add your handling code here:
-         btnLogin.setOpaque(true);
+        btnLogin.setOpaque(true);
         btnLogin.setBackground(Color.GREEN);
     }//GEN-LAST:event_btnLoginMousePressed
 
     private void btnLoginMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseReleased
-        // TODO add your handling code here:
         btnLogin.setOpaque(false);
     }//GEN-LAST:event_btnLoginMouseReleased
 
@@ -164,6 +175,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables

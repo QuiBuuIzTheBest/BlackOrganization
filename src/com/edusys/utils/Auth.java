@@ -11,7 +11,6 @@ import com.edusys.entity.NhanVien;
  * @author ASUS ZENBOOK
  */
 public class Auth {
-    
     public static NhanVien user = null;
     
     public static void clear(){
@@ -19,6 +18,10 @@ public class Auth {
     }
     
     public static boolean isLogin(){
-        return isLogin() && user.isVaiTro();
+        return Auth.user!=null;
+    }
+    
+    public static boolean isManager(){
+        return Auth.isLogin()&& user.isVaiTro();
     }
 }

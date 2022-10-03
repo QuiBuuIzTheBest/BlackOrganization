@@ -18,8 +18,6 @@ public class NhanVien {
     public NhanVien() {
     }
     
-    
-
     public NhanVien(String MaNV, String MatKhau, String HoTen, boolean VaiTro) {
         this.MaNV = MaNV;
         this.MatKhau = MatKhau;

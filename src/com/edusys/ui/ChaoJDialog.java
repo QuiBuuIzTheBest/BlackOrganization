@@ -51,6 +51,7 @@ public class ChaoJDialog extends javax.swing.JDialog {
         lblLoadingValue = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("EduSys");
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icons/logo.png"))); // NOI18N
 
