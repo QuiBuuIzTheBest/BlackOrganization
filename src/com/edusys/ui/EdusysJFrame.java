@@ -22,6 +22,7 @@ public class EdusysJFrame extends javax.swing.JFrame {
     public EdusysJFrame() {
         initComponents();
         init();
+//        userInfo();
     }
 
     public void init() {

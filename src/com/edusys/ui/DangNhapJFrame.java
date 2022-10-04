@@ -46,8 +46,6 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         } else {
             Auth.user = nhanVien;
             this.dispose();
-            new EdusysJFrame().setVisible(true);
-            new EdusysJFrame().setVisible(true);
         }
     }
 
