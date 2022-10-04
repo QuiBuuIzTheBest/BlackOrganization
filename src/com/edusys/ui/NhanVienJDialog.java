@@ -21,11 +21,16 @@ import javax.swing.table.DefaultTableModel;
 public class NhanVienJDialog extends javax.swing.JDialog {
 
     NhanVienDAO dao = new NhanVienDAO();
-    int row = -1;
-
+    int row = 0;// Vị trí hiện tại của Nhân viên trên form
+String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
+        String ngDung = Auth.user.getHoTen();
     public NhanVienJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
+        String ngDung = Auth.user.getHoTen();
+        lblInFo.setText(ngDung + " (" + role + ")");
+        init();
     }
 
     void init() {
@@ -33,6 +38,9 @@ public class NhanVienJDialog extends javax.swing.JDialog {
         this.fillTable();
         this.row = -1;
         this.updateStatus();
+        if(role.equals("Nhân Viên")){
+            btnInsert.setEnabled(false);
+        }
     }
 
     void fillTable() {
@@ -73,9 +81,9 @@ public class NhanVienJDialog extends javax.swing.JDialog {
         boolean last = (this.row == tblNhanVien.getRowCount() - 1);
 
         txtMaNhanVien.setEditable(!edit);
-        btnInsert.setEnabled(!edit);
+//        btnInsert.setEnabled(!edit);
         btnUpdate.setEnabled(edit);
-        btnDelete.setEnabled(edit);
+//        btnDelete.setEnabled(edit);
 
         btnFirst.setEnabled(edit && !first);
         btnPre.setEnabled(edit && !first);
@@ -128,9 +136,11 @@ public class NhanVienJDialog extends javax.swing.JDialog {
 
     void clearForm() {
         NhanVien nv = new NhanVien();
-        this.setForm(nv);
-        this.row = -1;
-        this.updateStatus();
+        if (nv != null) {
+            this.setForm(nv);
+            this.row = 0;
+            this.updateStatus();
+        }
     }
 
     void edit() {
@@ -176,7 +186,7 @@ public class NhanVienJDialog extends javax.swing.JDialog {
 
         btgVaiTro = new javax.swing.ButtonGroup();
         tabs = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        pnlEdit = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtMaNhanVien = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -194,11 +204,12 @@ public class NhanVienJDialog extends javax.swing.JDialog {
         btnLast = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtHoTenNV = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        pnlDanhSach = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNhanVien = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        lblInFo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("EduSys");
@@ -273,14 +284,14 @@ public class NhanVienJDialog extends javax.swing.JDialog {
 
         jLabel3.setText("Họ tên nhân viên");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlEditLayout = new javax.swing.GroupLayout(pnlEdit);
+        pnlEdit.setLayout(pnlEditLayout);
+        pnlEditLayout.setHorizontalGroup(
+            pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEditLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEditLayout.createSequentialGroup()
                         .addComponent(btnInsert)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUpdate)
@@ -296,12 +307,12 @@ public class NhanVienJDialog extends javax.swing.JDialog {
                         .addComponent(btnNext)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLast))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(pnlEditLayout.createSequentialGroup()
                         .addComponent(rdoTruongPhong)
                         .addGap(36, 36, 36)
                         .addComponent(rdoNhanVien))
                     .addComponent(jLabel4)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtHoTenNV, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,9 +321,9 @@ public class NhanVienJDialog extends javax.swing.JDialog {
                     .addComponent(jLabel3))
                 .addContainerGap(85, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlEditLayout.setVerticalGroup(
+            pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEditLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -328,11 +339,11 @@ public class NhanVienJDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdoTruongPhong)
                     .addComponent(rdoNhanVien))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInsert)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete)
@@ -344,7 +355,7 @@ public class NhanVienJDialog extends javax.swing.JDialog {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        tabs.addTab("Cập nhật", jPanel1);
+        tabs.addTab("Cập nhật", pnlEdit);
 
         tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -357,6 +368,7 @@ public class NhanVienJDialog extends javax.swing.JDialog {
                 "Mã", "Họ Tên", "Mật khẩu", "Vai trò"
             }
         ));
+        tblNhanVien.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblNhanVienMouseClicked(evt);
@@ -364,24 +376,24 @@ public class NhanVienJDialog extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblNhanVien);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlDanhSachLayout = new javax.swing.GroupLayout(pnlDanhSach);
+        pnlDanhSach.setLayout(pnlDanhSachLayout);
+        pnlDanhSachLayout.setHorizontalGroup(
+            pnlDanhSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDanhSachLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        pnlDanhSachLayout.setVerticalGroup(
+            pnlDanhSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDanhSachLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        tabs.addTab("Danh sách", jPanel2);
+        tabs.addTab("Danh sách", pnlDanhSach);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -394,6 +406,8 @@ public class NhanVienJDialog extends javax.swing.JDialog {
             }
         });
 
+        lblInFo.setText("jLabel6");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -401,12 +415,15 @@ public class NhanVienJDialog extends javax.swing.JDialog {
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBack)
-                .addGap(33, 33, 33))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblInFo, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBack)
+                        .addGap(33, 33, 33))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,8 +432,13 @@ public class NhanVienJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBack)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblInFo))))
         );
 
         pack();
@@ -426,16 +448,25 @@ public class NhanVienJDialog extends javax.swing.JDialog {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         int back = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn quay lại trang chính ?", "Quay lại trang chính", JOptionPane.YES_NO_OPTION);
         if (back == JOptionPane.YES_OPTION) {
+            String userID = Auth.user.getMaNV();
+            String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
+            String ngDung = Auth.user.getHoTen();
             dispose();
-            new EdusysJFrame().setVisible(true);
+            new EdusysJFrame(userID, role, ngDung).setVisible(true);
         }
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
-        if (evt.getClickCount() == 2) {
-            this.row = tblNhanVien.getSelectedRow();
+//        if (evt.getClickCount() == 2) {
+        this.row = tblNhanVien.rowAtPoint(evt.getPoint());
+        if (this.row >= 0) {
             this.edit();
+            tabs.setSelectedIndex(0);
+            txtMaNhanVien.setEditable(false);
+            return;
         }
+
+//        }
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
@@ -459,15 +490,15 @@ public class NhanVienJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-       this.update();
+        this.update();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-       this.delete();
+        this.delete();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-       this.clearForm();
+        this.clearForm();
     }//GEN-LAST:event_btnClearActionPerformed
 
     /**
@@ -528,9 +559,10 @@ public class NhanVienJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblInFo;
+    private javax.swing.JPanel pnlDanhSach;
+    private javax.swing.JPanel pnlEdit;
     private javax.swing.JRadioButton rdoNhanVien;
     private javax.swing.JRadioButton rdoTruongPhong;
     private javax.swing.JTabbedPane tabs;

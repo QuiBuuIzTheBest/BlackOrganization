@@ -1,5 +1,6 @@
 package com.edusys.ui;
 
+import com.edusys.utils.Auth;
 import javax.swing.JOptionPane;
 
 /*
@@ -253,8 +254,11 @@ public class TH_TKJDialog extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int back = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn quay lại trang chính ?", "Quay lại trang chính", JOptionPane.YES_NO_OPTION);
         if (back == JOptionPane.YES_OPTION) {
+            String userID = Auth.user.getMaNV();
+            String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
+            String ngDung = Auth.user.getHoTen();
             dispose();
-            new EdusysJFrame().setVisible(true);
+            new EdusysJFrame(userID,role,ngDung).setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
