@@ -11,9 +11,13 @@ public class ChaoJDialog extends javax.swing.JDialog {
     public ChaoJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        init();
         runLoading();
     }
 
+    public void init(){
+        setLocationRelativeTo(null);
+    }
     private void runLoading(){
         class Loading extends Thread{
             
@@ -26,8 +30,7 @@ public class ChaoJDialog extends javax.swing.JDialog {
                         progressBar.setValue(i);
                         if(i == 100){
                             dispose();
-//                            new EdusysJFrame().setVisible(true);
-                            
+//                            new EdusysJFrame().setVisible(true);                            
                         }
                     }catch(Exception ex){
                         Logger.getLogger(ChaoJDialog.class.getName()).log(Level.SEVERE, null, ex);

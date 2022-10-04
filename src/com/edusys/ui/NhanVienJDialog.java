@@ -22,14 +22,10 @@ public class NhanVienJDialog extends javax.swing.JDialog {
 
     NhanVienDAO dao = new NhanVienDAO();
     int row = 0;// Vị trí hiện tại của Nhân viên trên form
-String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
-        String ngDung = Auth.user.getHoTen();
+
     public NhanVienJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
-        String ngDung = Auth.user.getHoTen();
-        lblInFo.setText(ngDung + " (" + role + ")");
         init();
     }
 
@@ -38,11 +34,9 @@ String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
         this.fillTable();
         this.row = -1;
         this.updateStatus();
-        if(role.equals("Nhân Viên")){
-            btnInsert.setEnabled(false);
-        }
+        
     }
-
+    
     void fillTable() {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
@@ -80,15 +74,15 @@ String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
         boolean first = (this.row == 0);
         boolean last = (this.row == tblNhanVien.getRowCount() - 1);
 
-        txtMaNhanVien.setEditable(!edit);
-//        btnInsert.setEnabled(!edit);
-        btnUpdate.setEnabled(edit);
-//        btnDelete.setEnabled(edit);
+        txtMaNhanVien.setEditable(false);
+        btnInsert.setEnabled(false);
+        btnUpdate.setEnabled(true);
+        btnDelete.setEnabled(true);
 
-        btnFirst.setEnabled(edit && !first);
-        btnPre.setEnabled(edit && !first);
-        btnNext.setEnabled(edit && !first);
-        btnLast.setEnabled(edit && !first);
+        btnFirst.setEnabled(true);
+        btnPre.setEnabled(true);
+        btnNext.setEnabled(true);
+        btnLast.setEnabled(true);
     }
 
     void insert() {
@@ -139,7 +133,9 @@ String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
         if (nv != null) {
             this.setForm(nv);
             this.row = 0;
+            
             this.updateStatus();
+            btnInsert.setEnabled(true);
         }
     }
 
@@ -170,7 +166,7 @@ String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
         }
     }
 
-    void Last() {
+    void last() {
         this.row = tblNhanVien.getRowCount() - 1;
         this.edit();
     }
@@ -457,8 +453,8 @@ String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
-//        if (evt.getClickCount() == 2) {
-        this.row = tblNhanVien.rowAtPoint(evt.getPoint());
+        if (evt.getClickCount() == 1) {
+        this.row = tblNhanVien.getSelectedRow();
         if (this.row >= 0) {
             this.edit();
             tabs.setSelectedIndex(0);
@@ -466,7 +462,7 @@ String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
             return;
         }
 
-//        }
+        }
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
@@ -482,7 +478,7 @@ String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
-        this.Last();
+        this.last();
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
