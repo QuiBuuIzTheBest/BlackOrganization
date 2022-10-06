@@ -20,6 +20,7 @@ public class NhanVienDAO extends EdusysDAO<NhanVien, String> {
     String DELETE_SQL = "DELETE FROM nhan_vien WHERE MaNV=?";
     String SELECT_ALL_SQL = "SELECT * FROM nhan_vien";
     String SELECT_BY_ID_SQL = "SELECT * FROM nhan_vien WHERE MaNV=?";
+    String UPDATE_PASSWORD = "UPDATE nhan_vien SET MatKhau = ? WHERE MaNV = ?";
 
     @Override
     public void insert(NhanVien entity) {
@@ -33,10 +34,16 @@ public class NhanVienDAO extends EdusysDAO<NhanVien, String> {
     @Override
     public void update(NhanVien entity) {
         JdbcHelper.executeUpdate(UPDATE_SQL,
-                entity.getMaNV(),
                 entity.getMatKhau(),
                 entity.getHoTen(),
-                entity.isVaiTro());
+                entity.isVaiTro(),
+                entity.getMaNV());
+    }
+    
+    public void updatePassword(NhanVien entity) {
+        JdbcHelper.executeUpdate(UPDATE_PASSWORD,
+                entity.getMatKhau(),
+                entity.getMaNV());
     }
 
     @Override

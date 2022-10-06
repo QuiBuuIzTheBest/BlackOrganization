@@ -4,8 +4,13 @@
  */
 package com.edusys.ui;
 
+import com.edusys.dao.HocVienDAO;
+import com.edusys.entity.HocVien;
 import com.edusys.utils.Auth;
+import com.edusys.utils.XImage;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,14 +18,28 @@ import javax.swing.JOptionPane;
  */
 public class HocVienJDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form HocVienJDialog
-     */
+    HocVienDAO dao = new HocVienDAO();
     public HocVienJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        fillTableHocVien();
+        setIconImage(XImage.AppIcon);
     }
-
+    
+    void fillTableHocVien() {
+        DefaultTableModel model = (DefaultTableModel) tblHocVien.getModel();
+        model.setRowCount(0);
+        try {
+            List<HocVien> list = dao.selectAll();
+            for (HocVien nv : list) {
+                Object[] row = {nv.getMaHV(), nv.getHoTen(), nv.getGioiTinh(), nv.getNgaySinh(), nv.getSDT(), nv.getEmail()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+//            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+System.out.println(e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,12 +58,12 @@ public class HocVienJDialog extends javax.swing.JDialog {
         jTextField3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblHocVien = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblNguoiHoc = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -58,7 +77,7 @@ public class HocVienJDialog extends javax.swing.JDialog {
 
         jButton1.setText("Tìm");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblHocVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -69,7 +88,7 @@ public class HocVienJDialog extends javax.swing.JDialog {
                 "MaHV", "HoVaTen", "GioiTinh", "NgaySinh", "SDT", "Email"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblHocVien);
 
         jButton2.setText("Thêm");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -78,10 +97,10 @@ public class HocVienJDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton5.setText("Quay lại");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("Quay lại");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
 
@@ -100,7 +119,7 @@ public class HocVienJDialog extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
@@ -116,13 +135,13 @@ public class HocVienJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton5))
+                    .addComponent(btnBack))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Học viên", jPanel1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblNguoiHoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -133,7 +152,7 @@ public class HocVienJDialog extends javax.swing.JDialog {
                 "TT", "MaHV", "MaNH", "HoTen", "Diem"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblNguoiHoc);
 
         jButton3.setText("Xóa");
         jButton3.setMaximumSize(new java.awt.Dimension(83, 25));
@@ -214,7 +233,7 @@ public class HocVienJDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         int back = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn quay lại trang chính ?", "Quay lại trang chính", JOptionPane.YES_NO_OPTION);
         if (back == JOptionPane.YES_OPTION) {
             String userID = Auth.user.getMaNV();
@@ -223,7 +242,7 @@ public class HocVienJDialog extends javax.swing.JDialog {
             dispose();
             new EdusysJFrame(userID,role,ngDung).setVisible(true);
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,24 +274,27 @@ public class HocVienJDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                HocVienJDialog dialog = new HocVienJDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                try {
+                    String userID = Auth.user.getMaNV();
+                    String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
+                    String ngDung = Auth.user.getHoTen();
+                    new EdusysJFrame(userID, role, ngDung).setVisible(true);
+                } catch (Exception e) {
+                    String userID = "";
+                    String role = "";
+                    String ngDung = "a";
+                    new EdusysJFrame(userID, role, ngDung).setVisible(true);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -281,10 +303,10 @@ public class HocVienJDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tblHocVien;
+    private javax.swing.JTable tblNguoiHoc;
     // End of variables declaration//GEN-END:variables
 }

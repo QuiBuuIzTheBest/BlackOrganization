@@ -5,6 +5,7 @@
 package com.edusys.ui;
 
 import com.edusys.utils.Auth;
+import com.edusys.utils.XImage;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,7 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
     public KhoaHocJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(XImage.AppIcon);
     }
 
     /**
@@ -60,7 +62,7 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton9 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("EduSys");
@@ -231,10 +233,10 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Danh sách", jPanel2);
 
-        jButton9.setText("Quay lại");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("Quay lại");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
 
@@ -253,7 +255,7 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton9)
+                .addComponent(btnBack)
                 .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
@@ -265,7 +267,7 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton9)
+                .addComponent(btnBack)
                 .addContainerGap())
         );
 
@@ -273,7 +275,7 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         int back = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn quay lại trang chính ?", "Quay lại trang chính", JOptionPane.YES_NO_OPTION);
         if (back == JOptionPane.YES_OPTION) {
             String userID = Auth.user.getMaNV();
@@ -282,7 +284,7 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
             dispose();
             new EdusysJFrame(userID,role,ngDung).setVisible(true);
         }
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,19 +316,23 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                KhoaHocJDialog dialog = new KhoaHocJDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                try {
+                    String userID = Auth.user.getMaNV();
+                    String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
+                    String ngDung = Auth.user.getHoTen();
+                    new EdusysJFrame(userID, role, ngDung).setVisible(true);
+                } catch (Exception e) {
+                    String userID = "";
+                    String role = "";
+                    String ngDung = "";
+                    new EdusysJFrame(userID, role, ngDung).setVisible(true);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -335,7 +341,6 @@ public class KhoaHocJDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

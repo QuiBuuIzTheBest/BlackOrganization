@@ -9,32 +9,41 @@ import com.edusys.utils.JdbcHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
+
 /**
  *
  * @author ASUS ZENBOOK
  */
-public class HocVienDAO extends EdusysDAO<HocVien, String>{
+public class HocVienDAO extends EdusysDAO<HocVien, String> {
+
     String INSERT_SQL = "INSERT INTO HocVien(MaKH, MaNH, Diem) VALUES(?, ?, ?)";
     String UPDATE_SQL = "UPDATE HocVien SET MaKH=?, MaNH=?, Diem=? WHERE MaHV=?";
     String DELETE_SQL = "DELETE FROM HocVien WHERE MaHV=?";
-    String SELECT_ALL_SQL = "SELECT * FROM HocVien";
-    String SELECT_BY_ID_SQL = "SELECT * FROM HocVien WHERE MaHV=?";
+    String SELECT_ALL_SQL = "select a.MAHV, b.HOVATEN, b.GIOITINH, b.NGAYSINH, b.SDT, b.EMAIL\n"
+            + "from HOC_VIEN a inner join NGUOI_HOC b on a.MANH = b.MANH";
+    String SELECT_BY_ID_SQL = "select a.MAHV, b.HOVATEN, b.GIOITINH, b.NGAYSINH, b.SDT, b.EMAIL\n"
+            + "from HOC_VIEN a inner join NGUOI_HOC b on a.MANH = b.MANH WHERE MaHV=?";
 
     @Override
     public void insert(HocVien entity) {
         JdbcHelper.executeUpdate(INSERT_SQL,
-                entity.getMaKH(),
-                entity.getMaNH(),
-                entity.getDiemTB());
+                entity.getMaHV(),
+                entity.getHoTen(),
+                entity.getGioiTinh(),
+                entity.getNgaySinh(),
+                entity.getSDT(),
+                entity.getEmail());
     }
 
     @Override
     public void update(HocVien entity) {
         JdbcHelper.executeUpdate(UPDATE_SQL,
-                entity.getMaKH(),
-                entity.getMaNH(),
-                entity.getDiemTB(),
-                entity.getMaHV());
+                entity.getMaHV(),
+                entity.getHoTen(),
+                entity.getGioiTinh(),
+                entity.getNgaySinh(),
+                entity.getSDT(),
+                entity.getEmail());
     }
 
     @Override
@@ -63,10 +72,12 @@ public class HocVienDAO extends EdusysDAO<HocVien, String>{
             ResultSet rs = JdbcHelper.executeQuery(sql, args);
             while (rs.next()) {
                 HocVien entity = new HocVien();
-                entity.setMaHV(rs.getString("MaHV"));
-                entity.setMaKH(rs.getString("MaKH"));
-                entity.setMaNH(rs.getString("MaNH"));
-                entity.setDiemTB(rs.getFloat("DiemTB"));
+                entity.setMaHV(rs.getString("MAHV"));
+                entity.setHoTen(rs.getString("HOVATEN"));
+                entity.setGioiTinh(rs.getString("GIOITINH"));
+                entity.setNgaySinh(rs.getString("NGAYSINH"));
+                entity.setSDT(rs.getString("SDT"));
+                entity.setEmail(rs.getString("EMAIL"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

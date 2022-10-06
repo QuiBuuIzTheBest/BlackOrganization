@@ -5,6 +5,7 @@
 package com.edusys.ui;
 
 import com.edusys.utils.Auth;
+import com.edusys.utils.XImage;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,8 +20,9 @@ public class NguoiHocJDialog extends javax.swing.JDialog {
     public NguoiHocJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(XImage.AppIcon);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,7 +66,7 @@ public class NguoiHocJDialog extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton10 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("EduSys");
@@ -279,10 +281,10 @@ public class NguoiHocJDialog extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Danh sách", jPanel2);
 
-        jButton10.setText("Quay lại");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("Quay lại");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
 
@@ -297,7 +299,7 @@ public class NguoiHocJDialog extends javax.swing.JDialog {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton10)
+                .addComponent(btnBack)
                 .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
@@ -307,7 +309,7 @@ public class NguoiHocJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton10)
+                .addComponent(btnBack)
                 .addContainerGap())
         );
 
@@ -315,7 +317,7 @@ public class NguoiHocJDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         int back = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn quay lại trang chính ?", "Quay lại trang chính", JOptionPane.YES_NO_OPTION);
         if (back == JOptionPane.YES_OPTION) {
             String userID = Auth.user.getMaNV();
@@ -324,7 +326,7 @@ public class NguoiHocJDialog extends javax.swing.JDialog {
             dispose();
             new EdusysJFrame(userID,role,ngDung).setVisible(true);
         }
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,21 +358,24 @@ public class NguoiHocJDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NguoiHocJDialog dialog = new NguoiHocJDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                try {
+                    String userID = Auth.user.getMaNV();
+                    String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
+                    String ngDung = Auth.user.getHoTen();
+                    new EdusysJFrame(userID, role, ngDung).setVisible(true);
+                } catch (Exception e) {
+                    String userID = "";
+                    String role = "";
+                    String ngDung = "a";
+                    new EdusysJFrame(userID, role, ngDung).setVisible(true);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

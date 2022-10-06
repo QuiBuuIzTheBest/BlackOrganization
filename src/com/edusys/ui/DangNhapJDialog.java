@@ -8,7 +8,9 @@ import com.edusys.dao.NhanVienDAO;
 import com.edusys.entity.NhanVien;
 import com.edusys.utils.Auth;
 import com.edusys.utils.MsgBox;
+import com.edusys.utils.XImage;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -23,6 +25,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         initComponents();
         setTitle("Đăng nhập");
         init();
+        setIconImage(XImage.AppIcon);
     }
 
     public void init() {
@@ -83,7 +86,13 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Mật khẩu");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 108, 108, 12));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 108, 12));
+
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPassKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 132, 168, -1));
 
         btnLogin.setText("Đăng nhập");
@@ -137,6 +146,12 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         ketThuc();
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            dangNhap();
+        }
+    }//GEN-LAST:event_txtPassKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -148,7 +163,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -167,14 +182,17 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DangNhapJDialog dialog = new DangNhapJDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                try {
+                    String userID = Auth.user.getMaNV();
+                    String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
+                    String ngDung = Auth.user.getHoTen();
+                    new EdusysJFrame(userID, role, ngDung).setVisible(true);
+                } catch (Exception e) {
+                    String userID = "";
+                    String role = "";
+                    String ngDung = "";
+                    new EdusysJFrame(userID, role, ngDung).setVisible(true);
+                }
             }
         });
     }

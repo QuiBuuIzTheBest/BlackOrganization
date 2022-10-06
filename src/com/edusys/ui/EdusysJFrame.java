@@ -5,8 +5,8 @@
  */
 package com.edusys.ui;
 
-import com.edusys.dao.ThongKeDAO;
 import com.edusys.utils.Auth;
+import com.edusys.utils.XImage;
 import javax.swing.JOptionPane;
 import java.awt.Desktop;
 import java.io.IOException;
@@ -23,6 +23,7 @@ public class EdusysJFrame extends javax.swing.JFrame {
         initComponents();
         init();
         checkDangNhap(userID,role,ngDung);
+        setIconImage(XImage.AppIcon);
     }
 
     public void init() {
@@ -41,6 +42,7 @@ public class EdusysJFrame extends javax.swing.JFrame {
             mniChangePassword.setEnabled(false);
             mnuQuanLy.setEnabled(false);
             mniLogout.setEnabled(false);
+            mniLogin.setEnabled(true);
         } else {
             if (role.equals("Nhân Viên")) {
                 mniThongKe.setEnabled(false);
@@ -58,6 +60,7 @@ public class EdusysJFrame extends javax.swing.JFrame {
             mniChangePassword.setEnabled(true);
             mnuQuanLy.setEnabled(true);
             mniLogout.setEnabled(true);
+            mniLogin.setEnabled(false);
         }
     }
     public void startDongHo() {
@@ -79,13 +82,14 @@ public class EdusysJFrame extends javax.swing.JFrame {
     }
 
     public void openDoiMatKhau() {
+        dispose();
         new DoiMatKhauJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void dangXuat() {
-        dispose();
         int dangXuat = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn đăng xuất không ?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
-        if (dangXuat == JOptionPane.YES_OPTION) {
+        if (dangXuat == JOptionPane.YES_OPTION) { 
+            dispose();
             new DangNhapJDialog(this, rootPaneCheckingEnabled).setVisible(true);
         }
     }
@@ -103,22 +107,27 @@ public class EdusysJFrame extends javax.swing.JFrame {
     }
 
     public void openKhoaHoc() {
+        dispose();
         new KhoaHocJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void openChuyenDe() {
+        dispose();
         new ChuyenDeJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void openNguoiHoc() {
+        dispose();
         new NguoiHocJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void openHocVien() {
+        dispose();
         new HocVienJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
     public void openThongKe() {
+        dispose();
         new TH_TKJDialog(this, rootPaneCheckingEnabled).setVisible(true);
     }
 
@@ -129,7 +138,7 @@ public class EdusysJFrame extends javax.swing.JFrame {
     public void openHuongDan() {
         try {
             try {
-                Desktop.getDesktop().browse(new URI("https://youtu.be/BBJa32lCaaY"));
+                Desktop.getDesktop().browse(new URI("https://ap.poly.edu.vn/"));
             } catch (IOException ex) {
                 Logger.getLogger(EdusysJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -160,7 +169,6 @@ public class EdusysJFrame extends javax.swing.JFrame {
         btnChuyenDe = new javax.swing.JButton();
         btnNguoiHoc = new javax.swing.JButton();
         btnKhoaHoc = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
         jSeparator6 = new javax.swing.JToolBar.Separator();
         btnHuongDan = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -252,7 +260,6 @@ public class EdusysJFrame extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btnKhoaHoc);
-        jToolBar1.add(jSeparator2);
         jToolBar1.add(jSeparator6);
 
         btnHuongDan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icons/Globe.png"))); // NOI18N
@@ -403,6 +410,7 @@ public class EdusysJFrame extends javax.swing.JFrame {
 
         jMenu4.setText("Trợ giúp");
 
+        mniHuongDan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icons/Globe.png"))); // NOI18N
         mniHuongDan.setText("Hướng dẫn sử dụng");
         mniHuongDan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -411,6 +419,7 @@ public class EdusysJFrame extends javax.swing.JFrame {
         });
         jMenu4.add(mniHuongDan);
 
+        mniGioiThieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/icons/Info.png"))); // NOI18N
         mniGioiThieu.setText("Giới thiệu sản phẩm");
         mniGioiThieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -559,7 +568,7 @@ public class EdusysJFrame extends javax.swing.JFrame {
             public void run() {
                 try {
                     String userID = Auth.user.getMaNV();
-                    String role = Auth.user.isVaiTro() ? "Manager" : "Employee";
+                    String role = Auth.user.isVaiTro() ? "Quản Lý" : "Nhân Viên";
                     String ngDung = Auth.user.getHoTen();
                     new EdusysJFrame(userID, role, ngDung).setVisible(true);
                 } catch (Exception e) {
@@ -585,7 +594,6 @@ public class EdusysJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JSeparator jSeparator5;

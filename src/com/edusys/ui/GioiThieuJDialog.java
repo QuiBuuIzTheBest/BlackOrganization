@@ -4,6 +4,8 @@
  */
 package com.edusys.ui;
 
+import com.edusys.utils.XImage;
+
 /**
  *
  * @author ASUS ZENBOOK
@@ -17,6 +19,7 @@ public class GioiThieuJDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         jTextArea1.setEditable(false);
+        setIconImage(XImage.AppIcon);
     }
 
     /**

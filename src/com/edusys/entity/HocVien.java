@@ -11,18 +11,22 @@ package com.edusys.entity;
  */
 public class HocVien {
     String MaHV;
-    String MaKH;
-    String MaNH;
-    float DiemTB;
-
-    public HocVien(String MaHV, String MaKH, String MaNH, float DiemTB) {
-        this.MaHV = MaHV;
-        this.MaKH = MaKH;
-        this.MaNH = MaNH;
-        this.DiemTB = DiemTB;
-    }
+    String hoTen;
+    String gioiTinh;
+    String ngaySinh;
+    String SDT;
+    String email;
 
     public HocVien() {
+    }
+
+    public HocVien(String MaHV, String hoTen, String gioiTinh, String ngaySinh, String SDT, String email) {
+        this.MaHV = MaHV;
+        this.hoTen = hoTen;
+        this.gioiTinh = gioiTinh;
+        this.ngaySinh = ngaySinh;
+        this.SDT = SDT;
+        this.email = email;
     }
 
     public String getMaHV() {
@@ -33,29 +37,46 @@ public class HocVien {
         this.MaHV = MaHV;
     }
 
-    public String getMaKH() {
-        return MaKH;
+    public String getHoTen() {
+        return hoTen;
     }
 
-    public void setMaKH(String MaKH) {
-        this.MaKH = MaKH;
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
     }
 
-    public String getMaNH() {
-        return MaNH;
+    public String getGioiTinh() {
+        return gioiTinh;
     }
 
-    public void setMaNH(String MaNH) {
-        this.MaNH = MaNH;
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 
-    public float getDiemTB() {
-        return DiemTB;
+    public String getNgaySinh() {
+        return ngaySinh;
     }
 
-    public void setDiemTB(float DiemTB) {
-        this.DiemTB = DiemTB;
+    public void setNgaySinh(String ngaySinh) {
+        this.ngaySinh = ngaySinh;
     }
+
+    public String getSDT() {
+        return SDT;
+    }
+
+    public void setSDT(String SDT) {
+        this.SDT = SDT;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     
     
 }

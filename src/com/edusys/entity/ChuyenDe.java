@@ -27,7 +27,6 @@ public class ChuyenDe {
         this.TenCD = TenCD;
         this.ThoiLuong = ThoiLuong;
         this.HocPhi = HocPhi;
-        this.MoTa = MoTa;
         this.HinhLogo = HinhLogo;
     }
     
@@ -63,14 +62,6 @@ public class ChuyenDe {
 
     public void setHocPhi(float HocPhi) {
         this.HocPhi = HocPhi;
-    }
-
-    public String getMoTa() {
-        return MoTa;
-    }
-
-    public void setMoTa(String MoTa) {
-        this.MoTa = MoTa;
     }
 
     public String getHinhLogo() {

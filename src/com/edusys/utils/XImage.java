@@ -16,9 +16,13 @@ import javax.swing.ImageIcon;
  * @author ASUS ZENBOOK
  */
 public class XImage {
-    public static Image getAppIcon() {
-        URL url = XImage.class.getResource("/com/edusys/icons/fpt.png");
-        return new ImageIcon(url).getImage();
+    public static final Image AppIcon;
+    static {
+        String file = "src\\com\\edusys\\icons\\logo.png";
+        ImageIcon icon = new ImageIcon(file);
+        AppIcon = icon.getImage();
+//        AppIcon = new ImageIcon(XImage.class.getResource(file)).getImage();
+        
     }
 
     public static void save(File src) {

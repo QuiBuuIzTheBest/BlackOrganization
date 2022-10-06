@@ -152,6 +152,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mniHuongDan">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/edusys/icons/Globe.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="H&#x1b0;&#x1edb;ng d&#x1eab;n s&#x1eed; d&#x1ee5;ng"/>
               </Properties>
               <Events>
@@ -160,6 +163,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniGioiThieu">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/edusys/icons/Info.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Gi&#x1edb;i thi&#x1ec7;u s&#x1ea3;n ph&#x1ea9;m"/>
               </Properties>
               <Events>
@@ -295,8 +301,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKhoaHocActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator6">
         </Component>
